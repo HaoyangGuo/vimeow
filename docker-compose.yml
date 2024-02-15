@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  vimeow_db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: vimeow_db
+    volumes:
+      - vimeow_db_volume:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+volumes:
+  vimeow_db_volume:
