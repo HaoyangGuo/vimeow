@@ -1,20 +1,18 @@
 meta {
-  name: signup
+  name: signin
   type: http
-  seq: 1
+  seq: 2
 }
 
 post {
-  url: http://localhost:8080/api/auth/signup
+  url: http://localhost:8080/api/auth/signin
   body: json
   auth: none
 }
 
 body:json {
   {
-    "email": "bfernandez@ucsd.edu",
     "username": "kate",
     "password": "12345678"
   }
-  
 }
