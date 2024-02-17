@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    private AuthService authService;
+    private final AuthService authService;
 
     public AuthController(AuthService authService) {
         this.authService = authService;
@@ -30,5 +30,10 @@ public class AuthController {
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signupRequest) {
         MessageResponse messageResponse = authService.registerUser(signupRequest);
         return ResponseEntity.ok(messageResponse);
+    }
+
+    @GetMapping("/is-authenticated")
+    public ResponseEntity<?> isAuthenticated() {
+        return ResponseEntity.ok(new MessageResponse("Authenticated"));
     }
 }

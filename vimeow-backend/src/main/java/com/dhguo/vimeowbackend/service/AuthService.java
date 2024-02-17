@@ -49,11 +49,11 @@ public class AuthService {
     @Transactional
     public MessageResponse registerUser(SignupRequest signupRequest) {
         if (userRepository.existsByUsername(signupRequest.getUsername())) {
-            return new MessageResponse("Error: Username is already taken!");
+            throw new RuntimeException("Error: Username is already taken!");
         }
 
         if (userRepository.existsByEmail(signupRequest.getEmail())) {
-            return new MessageResponse("Error: Email is already in use!");
+            throw new RuntimeException("Error: Email is already in use!");
         }
 
         User user = new User(signupRequest.getUsername(),

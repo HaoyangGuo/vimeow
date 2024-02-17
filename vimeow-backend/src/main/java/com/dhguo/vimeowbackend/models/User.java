@@ -5,6 +5,9 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table( name = "users",
         uniqueConstraints = {
@@ -28,6 +31,15 @@ public class User {
     @NotBlank
     @Size(max = 120)
     private String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private final Set<Video> videos = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private final Set<Comment> comments = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private final Set<Like> likes = new HashSet<>();
 
     public User() {
     }
@@ -68,5 +80,17 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Video> getVideos() {
+        return videos;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public Set<Like> getLikes() {
+        return likes;
     }
 }
